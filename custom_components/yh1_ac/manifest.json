@@ -1,0 +1,11 @@
+{
+  "domain": "yh1_ac",
+  "name": "Y-H1 IR Air Conditioner",
+  "codeowners": ["@ramondsq"],
+  "dependencies": ["remote"],
+  "documentation": "https://github.com/ramondsq/ha-yh1-ac",
+  "iot_class": "assumed_state",
+  "issue_tracker": "https://github.com/ramondsq/ha-yh1-ac/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

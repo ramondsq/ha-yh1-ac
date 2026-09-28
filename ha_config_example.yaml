@@ -1,0 +1,42 @@
+# Add to configuration.yaml (or any file under packages/)
+# 放进 configuration.yaml, 或 packages 目录下的任意 yaml 文件
+climate:
+  - platform: yh1_ac
+    name: Living Room AC
+    unique_id: yh1_ac_living_room
+    remote_entity_id: remote.rm4_mini                # your Broadlink remote entity / 你的 Broadlink remote 实体
+    # temperature_sensor: sensor.living_room_temperature  # optional: show room temp / 可选: 显示室温
+    # power_sensor: binary_sensor.ac_running              # optional: on = AC running / 可选: on 表示在运行
+    # delay: 5                                            # seconds to wait after the SMART code / SMART 码之后等几秒
+    # hvac_modes: [cool, dry, fan_only, heat, auto]       # drop heat on cooling-only units / 单冷机型去掉 heat
+
+  # A second unit with its own RM4 / 第二台空调, 用另一个 RM4
+  # - platform: yh1_ac
+  #   name: Bedroom AC
+  #   unique_id: yh1_ac_bedroom
+  #   remote_entity_id: remote.rm4_mini_bedroom
+
+automation:
+  - alias: Cool down before getting home
+    trigger:
+      - platform: time
+        at: "18:00:00"
+    condition:
+      - condition: time
+        weekday: [mon, tue, wed, thu, fri]
+    action:
+      - service: climate.set_temperature
+        target:
+          entity_id: climate.living_room_ac
+        data:
+          hvac_mode: cool
+          temperature: 26
+
+  - alias: Turn the AC off at 3am
+    trigger:
+      - platform: time
+        at: "03:00:00"
+    action:
+      - service: climate.turn_off
+        target:
+          entity_id: climate.living_room_ac

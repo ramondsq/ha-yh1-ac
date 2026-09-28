@@ -1,0 +1,5 @@
+__pycache__/
+.pytest_cache/
+.DS_Store
+# 说明书版权属于厂商, 不放进仓库 (README 里放 Google Drive 链接)
+docs/*.pdf
